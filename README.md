@@ -1,98 +1,95 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Conectár - Backend (NestJS)
+Este é o backend da aplicação de gerenciamento de usuários desenvolvida como parte do desafio técnico da Conectár.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Funcionalidades Implementadas
+Autenticação: Registro de usuários (/auth/register) e Login (/auth/login) com JWT.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Gerenciamento de Usuários (CRUD): Operações para criar, listar, atualizar e excluir usuários.
 
-## Description
+Controle de Acesso: Proteção de rotas para administradores (admin) utilizando Guards e Roles personalizados.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Filtragem e Ordenação: Possibilidade de filtrar usuários por nome, role, e ordenar por ID, nome, e-mail, data de criação e último login.
 
-## Project setup
+Status de Atividade: Endpoint para identificar usuários inativos (sem login nos últimos 30 dias), com atualização do lastLogin no login.
 
-```bash
-$ pnpm install
-```
+Tecnologias Utilizadas
+Framework: NestJS
 
-## Compile and run the project
+Linguagem: TypeScript
 
-```bash
-# development
-$ pnpm run start
+Banco de Dados: PostgreSQL
 
-# watch mode
-$ pnpm run start:dev
+ORM: TypeORM
 
-# production mode
-$ pnpm run start:prod
-```
+Autenticação: JWT (@nestjs/jwt, passport-jwt, bcrypt)
 
-## Run tests
+Documentação API: Swagger (@nestjs/swagger)
 
-```bash
-# unit tests
-$ pnpm run test
+Como Configurar e Executar
+Pré-requisitos
+Node.js (v18 ou superior recomendado)
 
-# e2e tests
-$ pnpm run test:e2e
+npm ou Yarn
 
-# test coverage
-$ pnpm run test:cov
-```
+Docker (opcional, para rodar PostgreSQL facilmente) ou uma instância de PostgreSQL rodando localmente.
 
-## Deployment
+Configuração do Banco de Dados (PostgreSQL)
+Certifique-se de ter uma instância de PostgreSQL rodando.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Exemplo com Docker:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+docker run --name pg-conectardb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Herbert9966 -e POSTGRES_DB=conectar_db -p 5050:5432 -d postgres
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+(Ajuste as credenciais e porta conforme a sua configuração no app.module.ts).
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+O TypeORM está configurado com synchronize: true para criar automaticamente as tabelas ao iniciar (apenas para desenvolvimento).
 
-## Resources
+Instalação e Execução
+Clone este repositório:
 
-Check out a few resources that may come in handy when working with NestJS:
+git clone https://github.com/DevHerbertt/Conectar-backend.git
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Navegue até a pasta do projeto:
 
-## Support
+cd Conectar-backend
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Instale as dependências:
 
-## Stay in touch
+npm install
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+ou
 
-## License
+yarn
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Crie um arquivo .env na raiz do projeto e adicione a chave secreta do JWT:
+
+JWT_SECRET=UM_SEGREDO_MUITO_FORTE_E_ALEATORIO
+
+(Use uma string longa e complexa. Esta deve ser a mesma no backend e frontend para validação JWT).
+
+Inicie o servidor em modo de desenvolvimento:
+
+npm run start:dev
+
+ou
+
+yarn start:dev
+
+## O backend estará rodando em http://localhost:3000.
+
+# Documentação da API (Swagger)
+A documentação interativa da API está disponível em:
+http://localhost:3000/api (ou a rota que você configurou no main.ts para o Swagger).
+
+# Decisões de Design e Arquitetura
+NestJS: Escolhido pela sua arquitetura modular, uso de injeção de dependência e suporte robusto a TypeScript, o que facilita a escalabilidade e a manutenção.
+
+TypeORM: Utilizado para mapeamento objeto-relacional, permitindo interações com o banco de dados de forma orientada a objetos e segura contra SQL Injection.
+
+JWT para Autenticação: Padrão da indústria para autenticação stateless, proporcionando segurança e escalabilidade.
+
+Guards e Decorators Personalizados: Implementados para um controle de acesso baseado em roles (RBAC) claro e fácil de aplicar em rotas e controllers.
+
+Separação de Responsabilidades: O código é organizado em módulos (AuthModule, UsersModule, AdminModule) e camadas (controllers, services, entities, DTOs) para promover a legibilidade e a manutenibilidade.
+
+Tratamento de Erros: Exceções HTTP do NestJS são utilizadas para fornecer respostas padronizadas e claras em caso de erros.
