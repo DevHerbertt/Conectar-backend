@@ -12,7 +12,7 @@ Filtragem e Ordenação: Possibilidade de filtrar usuários por nome, role, e or
 
 Status de Atividade: Endpoint para identificar usuários inativos (sem login nos últimos 30 dias), com atualização do lastLogin no login.
 
-Tecnologias Utilizadas
+# Tecnologias Utilizadas
 Framework: NestJS
 
 Linguagem: TypeScript
@@ -25,7 +25,7 @@ Autenticação: JWT (@nestjs/jwt, passport-jwt, bcrypt)
 
 Documentação API: Swagger (@nestjs/swagger)
 
-Como Configurar e Executar
+# Como Configurar e Executar
 Pré-requisitos
 Node.js (v18 ou superior recomendado)
 
@@ -36,7 +36,7 @@ Docker (opcional, para rodar PostgreSQL facilmente) ou uma instância de Postgre
 Configuração do Banco de Dados (PostgreSQL)
 Certifique-se de ter uma instância de PostgreSQL rodando.
 
-Exemplo com Docker:
+## Exemplo com Docker:
 
 docker run --name pg-conectardb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Herbert9966 -e POSTGRES_DB=conectar_db -p 5050:5432 -d postgres
 
@@ -44,7 +44,7 @@ docker run --name pg-conectardb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=H
 
 O TypeORM está configurado com synchronize: true para criar automaticamente as tabelas ao iniciar (apenas para desenvolvimento).
 
-Instalação e Execução
+# Instalação e Execução
 Clone este repositório:
 
 git clone https://github.com/DevHerbertt/Conectar-backend.git
@@ -67,7 +67,7 @@ JWT_SECRET=UM_SEGREDO_MUITO_FORTE_E_ALEATORIO
 
 (Use uma string longa e complexa. Esta deve ser a mesma no backend e frontend para validação JWT).
 
-Inicie o servidor em modo de desenvolvimento:
+# Inicie o servidor em modo de desenvolvimento:
 
 npm run start:dev
 
