@@ -31,8 +31,9 @@ Node.js (v18 ou superior recomendado)
 
 npm ou Yarn
 
+### 2. Configuração do Banco de Dados
 Docker (opcional, para rodar PostgreSQL facilmente) ou uma instância de PostgreSQL rodando localmente.
-
+Você precisa ter o banco `conectar_db` criado **antes de rodar o backend**.
 Configuração do Banco de Dados (PostgreSQL)
 Certifique-se de ter uma instância de PostgreSQL rodando.
 
