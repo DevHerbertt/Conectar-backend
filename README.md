@@ -1,96 +1,126 @@
-# Conectár - Backend (NestJS)
-Este é o backend da aplicação de gerenciamento de usuários desenvolvida como parte do desafio técnico da Conectár.
+# 🚀 Conectár - Backend (NestJS)
 
-# Funcionalidades Implementadas
-Autenticação: Registro de usuários (/auth/register) e Login (/auth/login) com JWT.
+Backend da aplicação de gerenciamento de usuários para o desafio técnico da Conectár.
 
-Gerenciamento de Usuários (CRUD): Operações para criar, listar, atualizar e excluir usuários.
+---
 
-Controle de Acesso: Proteção de rotas para administradores (admin) utilizando Guards e Roles personalizados.
+## ✨ Funcionalidades
 
-Filtragem e Ordenação: Possibilidade de filtrar usuários por nome, role, e ordenar por ID, nome, e-mail, data de criação e último login.
+- **Autenticação:**
+  - Registro de usuários: `POST /auth/register`
+  - Login: `POST /auth/login` (JWT)
+- **Gerenciamento de Usuários (CRUD):**
+  - Criar, listar, atualizar e excluir usuários
+- **Controle de Acesso:**
+  - Proteção de rotas para administradores (`admin`) com Guards e Roles personalizados
+- **Filtragem e Ordenação:**
+  - Filtrar usuários por nome, role
+  - Ordenar por ID, nome, e-mail, data de criação e último login
+- **Status de Atividade:**
+  - Endpoint para identificar usuários inativos (sem login nos últimos 30 dias)
+  - Atualização do `lastLogin` no login
 
-Status de Atividade: Endpoint para identificar usuários inativos (sem login nos últimos 30 dias), com atualização do lastLogin no login.
+---
 
-# Tecnologias Utilizadas
-Framework: NestJS
+## 🛠️ Tecnologias Utilizadas
 
-Linguagem: TypeScript
+- **Framework:** NestJS
+- **Linguagem:** TypeScript
+- **Banco de Dados:** PostgreSQL
+- **ORM:** TypeORM
+- **Autenticação:** JWT (`@nestjs/jwt`, `passport-jwt`, `bcrypt`)
+- **Documentação API:** Swagger (`@nestjs/swagger`)
 
-Banco de Dados: PostgreSQL
+---
 
-ORM: TypeORM
+## ⚙️ Configuração e Execução
 
-Autenticação: JWT (@nestjs/jwt, passport-jwt, bcrypt)
+### Pré-requisitos
 
-Documentação API: Swagger (@nestjs/swagger)
+- Node.js (v18 ou superior recomendado)
+- npm ou Yarn
+- Docker (opcional, para rodar PostgreSQL facilmente) **ou** uma instância de PostgreSQL local
 
-# Como Configurar e Executar
-Pré-requisitos
-Node.js (v18 ou superior recomendado)
+### Configuração do Banco de Dados (PostgreSQL)
 
-npm ou Yarn
+> Certifique-se de ter uma instância de PostgreSQL rodando.
 
-### 2. Configuração do Banco de Dados
-Docker (opcional, para rodar PostgreSQL facilmente) ou uma instância de PostgreSQL rodando localmente.
-Você precisa ter o banco `conectar_db` criado **antes de rodar o backend**.
-Configuração do Banco de Dados (PostgreSQL)
-Certifique-se de ter uma instância de PostgreSQL rodando.
+#### Exemplo com Docker:
 
-## Exemplo com Docker:
+```bash
+docker run --name pg-conectardb \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=Herbert9966 \
+  -e POSTGRES_DB=conectar_db \
+  -p 5050:5432 -d postgres
+```
 
-docker run --name pg-conectardb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Herbert9966 -e POSTGRES_DB=conectar_db -p 5050:5432 -d postgres
+> Ajuste as credenciais e porta conforme sua configuração no `app.module.ts`.
 
-(Ajuste as credenciais e porta conforme a sua configuração no app.module.ts).
+- O TypeORM está com `synchronize: true` para criar as tabelas automaticamente ao iniciar (apenas para desenvolvimento).
 
-O TypeORM está configurado com synchronize: true para criar automaticamente as tabelas ao iniciar (apenas para desenvolvimento).
+### Instalação e Execução
 
-# Instalação e Execução
-Clone este repositório:
+1. **Clone o repositório:**
 
-git clone https://github.com/DevHerbertt/Conectar-backend.git
+   ```bash
+   git clone https://github.com/DevHerbertt/Conectar-backend.git
+   cd Conectar-backend
+   ```
 
-Navegue até a pasta do projeto:
+2. **Instale as dependências:**
 
-cd Conectar-backend
+   ```bash
+   npm install
+   # ou
+   yarn
+   ```
 
-Instale as dependências:
+3. **Configure as variáveis de ambiente:**
 
-npm install
+   Crie um arquivo `.env` na raiz do projeto e adicione a chave secreta do JWT:
 
-ou
+   ```env
+   JWT_SECRET=UM_SEGREDO_MUITO_FORTE_E_ALEATORIO
+   ```
+   > Use uma string longa e complexa. Esta deve ser a mesma no backend e frontend para validação JWT.
 
-yarn
+4. **Inicie o servidor em modo de desenvolvimento:**
 
-Crie um arquivo .env na raiz do projeto e adicione a chave secreta do JWT:
+   ```bash
+   npm run start:dev
+   # ou
+   yarn start:dev
+   ```
 
-JWT_SECRET=UM_SEGREDO_MUITO_FORTE_E_ALEATORIO
+- O backend estará rodando em: [http://localhost:3000](http://localhost:3000)
 
-(Use uma string longa e complexa. Esta deve ser a mesma no backend e frontend para validação JWT).
+---
 
-# Inicie o servidor em modo de desenvolvimento:
+## 📚 Documentação da API (Swagger)
 
-npm run start:dev
+Acesse a documentação interativa em:
 
-ou
+[http://localhost:3000/api](http://localhost:3000/api)
 
-yarn start:dev
+---
 
-## O backend estará rodando em http://localhost:3000.
+## 🏗️ Decisões de Design e Arquitetura
 
-# Documentação da API (Swagger)
-A documentação interativa da API está disponível em:
-http://localhost:3000/api (ou a rota que você configurou no main.ts para o Swagger).
+- **NestJS:** Arquitetura modular, injeção de dependência, suporte robusto a TypeScript.
+- **TypeORM:** Mapeamento objeto-relacional, interações seguras com o banco de dados.
+- **JWT:** Autenticação stateless, segurança e escalabilidade.
+- **Guards e Decorators Personalizados:** Controle de acesso baseado em roles (RBAC).
+- **Separação de Responsabilidades:** Código organizado em módulos e camadas (controllers, services, entities, DTOs).
+- **Tratamento de Erros:** Exceções HTTP do NestJS para respostas padronizadas e claras.
 
-# Decisões de Design e Arquitetura
-NestJS: Escolhido pela sua arquitetura modular, uso de injeção de dependência e suporte robusto a TypeScript, o que facilita a escalabilidade e a manutenção.
+---
 
-TypeORM: Utilizado para mapeamento objeto-relacional, permitindo interações com o banco de dados de forma orientada a objetos e segura contra SQL Injection.
+## 📝 Observações
 
-JWT para Autenticação: Padrão da indústria para autenticação stateless, proporcionando segurança e escalabilidade.
+- Para ambiente de produção, ajuste as configurações de segurança e variáveis sensíveis.
+- Contribuições são bem-vindas!
 
-Guards e Decorators Personalizados: Implementados para um controle de acesso baseado em roles (RBAC) claro e fácil de aplicar em rotas e controllers.
+---
 
-Separação de Responsabilidades: O código é organizado em módulos (AuthModule, UsersModule, AdminModule) e camadas (controllers, services, entities, DTOs) para promover a legibilidade e a manutenibilidade.
-
-Tratamento de Erros: Exceções HTTP do NestJS são utilizadas para fornecer respostas padronizadas e claras em caso de erros.
+> Desenvolvido para o desafio técnico da Conectár.
